@@ -13,24 +13,27 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+
         difficulty: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             validate: {
                 isInRange(value) {
                     if (value < 1 || value > 5) {
                         throw new Error("Difficulty value out of range (1 to 5)")
                     }
-                },
-                allowNull: false,
+                }
             },
-            duration: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-            season: {
-                type: DataTypes.STRING,
-                allowNull: false
-            }
+        },
+
+        duration: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+
+        season: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
-    });
+    }, {timestamps: false});
   };

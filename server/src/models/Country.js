@@ -5,6 +5,8 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Country', {
     id: {
+      
+      autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
       validate: {
@@ -14,32 +16,31 @@ module.exports = (sequelize) => {
           }
         }
       },
-      allowNull: false,
     },
 
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSONB,
       allowNull: false,
     },
 
-    flag: {
-      type: DataTypes.STRING,
+    flags: {
+      type: DataTypes.JSONB,
       allowNull: false
     },
 
-    continent: {
-      type: DataTypes.STRING,
+    continents: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
     },
     
     capital: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true
     },
 
     subregion: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
 
     area: {
@@ -52,5 +53,5 @@ module.exports = (sequelize) => {
       allowNull: false
     }
 
-  });
+  }, {timestamps: false});
 };
