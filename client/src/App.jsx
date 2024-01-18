@@ -1,16 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Route, Routes } from "react-router-dom";
 import './App.css'
 
-import axios from "axios"
+import Landing from "./components/Landing/Landing.jsx"
+import Home from "./components/Home/Home.jsx"
 
 function App() {
 
   return (
-    <>
-      <p>App</p>
-    </>
+    <div className="App" style={{height: "100vh", background: "slategray"}}>
+        <Routes>
+            <Route path="/" element={<Landing/>}/>
+
+            <Route path="/home" element={<Home/>}/>
+        </Routes>
+    </div>
+      
   )
 }
 
