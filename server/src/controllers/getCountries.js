@@ -25,6 +25,18 @@ module.exports = async function(req, res) {
             else throw new Error("No hay coincidencias.")
         }
 
+        else if (req.query.page) {
+            const page = (req.query.page - 1) * req.query.items
+            const items = req.query.items
+            
+            const countries = await Country.findAll({
+                offset: page,
+                limit: items,
+              });
+
+            res.status(200).json(countries)
+        }
+
         else {
             const countries = await Country.findAll()
             res.status(200).json(countries)

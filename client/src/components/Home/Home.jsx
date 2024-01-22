@@ -1,30 +1,29 @@
 import Navbar from "../Navbar/Navbar.jsx"
 import Cards from "../Cards/Cards.jsx"
-import axios from "axios"
-import { useState, useEffect } from "react"
+import { Container } from "../../styles/Home.styled.js"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import { storeActivities, storeCountries, switchPage, filterByActivity, filterByContinent } from "../../redux/actions.js"
+
+import { Outlet } from "react-router-dom"
+
 
 export default function Home() {
-    let [countries, setCountries] = useState([])
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        async function getData() {
-            try {
-                const { data } = await axios("http://localhost:3001/countries")
-                setCountries(data)
-            } catch(error) {
-                console.log(error)
-            }
-        }
-
-        getData()
+        dispatch(storeCountries())
+        dispatch(storeActivities())
     }, [])
-
+    
     return(
-        <div className="Home">
-            <Navbar></Navbar>
+        <Container>
             <h1>Home page</h1>
+            <div class="layout">
+                <Cards />
+                <Outlet />
+            </div>
+        </Container>
 
-            <Cards countries={countries}></Cards>
-        </div>
     )
 }

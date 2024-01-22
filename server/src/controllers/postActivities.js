@@ -10,11 +10,16 @@ module.exports = async function(req, res) {
             season: req.body.season,
         })
 
-        req.body.countries.forEach(async item => {
-            const country = await Country.findByPk(item)
-
-            newActivity.addCountry(country)
-        });
+        if (req.body.countries) {
+            req.body.countries.forEach(async item => {
+                const country = await Country.findByPk(item.id)
+    
+                newActivity.addCountry(country)
+            });
+        } else {
+            throw new Error("No se indicaron países para la actividad")
+        }
+       
 
         
 
