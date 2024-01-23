@@ -1,6 +1,5 @@
 import Card from "../Card/Card.jsx"
 import { Container } from "../../styles/Cards.styled"
-import axios from "axios"
 import { useEffect, useState } from "react"
 import { switchPage, filterByActivity, filterByContinent } from "../../redux/actions.js"
 import { useDispatch, useSelector } from "react-redux"
@@ -11,14 +10,29 @@ export default function Cards(props) {
     const filteredCountries = useSelector((state) => state.filteredCountries);
     const allActivities = useSelector((state) => state.allActivities);
     const [force, setForce] = useState(false)
+    const [page, setPage] = useState(1)
+    const [nPages, setPagesNum] = useState(filteredCountries.length / 10)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(switchPage(1))
+        setPagesNum(filteredCountries.length / 10)
+        setPage(1)
     }, [force, filteredCountries])
 
-    const nPages = (filteredCountries.length / 10)
+    useEffect(() => {
+        dispatch(switchPage(page))
+    }, [page])
+
+    function handlePageSwitch(pageToSwitch) {
+        
+        if (pageToSwitch < 1 || pageToSwitch >= (nPages + 1)) {
+            return 0
+        }
+        
+        setPage(pageToSwitch)
+    }
 
     function createButtons() {
         let buttons = []
@@ -74,7 +88,10 @@ export default function Cards(props) {
             </div>
             
             <div>
-                {createButtons().map((nButton) => {return <button key={nButton} onClick={(e)=>{dispatch(switchPage(e.target.name))}} name={nButton}>{nButton}</button>})}
+                <h3>Pág. {page}</h3>
+                <button onClick={()=>{handlePageSwitch(Number(page) - 1)}}>prev</button>
+                    {createButtons().map((nButton) => {return <button key={nButton} onClick={(e)=>{handlePageSwitch(e.target.name)}} name={nButton}>{nButton}</button>})}
+                <button onClick={()=>{handlePageSwitch(Number(page) + 1)}}>next</button>
             </div>
         </Container>
     )

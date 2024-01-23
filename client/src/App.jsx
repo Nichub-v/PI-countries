@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 import './App.css'
 
 import Landing from "./components/Landing/Landing.jsx"
@@ -7,13 +8,24 @@ import HomeDetail from "./components/HomeDetail/HomeDetail.jsx"
 import HomeForm from "./components/HomeForm/HomeForm.jsx"
 
 import Navbar from "./components/Navbar/Navbar.jsx"
+import GlobalStyles from "./styles/Global.js";
 
 function App() {
-  const showPostComponent = true
+  const darkTheme = {
+    colors: {
+      text: "#ffffff",
+      lighterBgCol: "#474747",
+      bgCol: "#353535",
+      darkerBgCol:"#252525",
+    }
+  }
+
 
   return (
-    <div className="App" style={{height: "100vh", background: "slategray"}}>
-      <Navbar></Navbar>
+    <ThemeProvider theme={darkTheme}>
+      <GlobalStyles />
+      <div className="App" style={{height: "100vh", background: "slategray"}}>
+        <Navbar></Navbar>
 
         <Routes>
             <Route path="/" element={<Landing/>}/>
@@ -23,8 +35,8 @@ function App() {
               <Route path="/home/add_Activity" element={<HomeForm/>}/>
             </Route>
         </Routes>
-    </div>
-      
+     </div>  
+    </ThemeProvider>
   )
 }
 

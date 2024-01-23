@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { serverIp, serverPort } from "../../config.js"
 
 export default function HomeForm() {
     const [formData, setFormData] = useState({countries: []})
@@ -17,7 +18,7 @@ export default function HomeForm() {
             return 0
         }
 
-        axios.get(`http://localhost:3001/countries/?name=${name}`).then(({ data }) => {
+        axios.get(`http://${serverIp}:${serverPort}/countries/?name=${name}`).then(({ data }) => {
             setResults(data)
         }).catch((error) => {
             setResults([])
@@ -57,7 +58,7 @@ export default function HomeForm() {
 
     function handleSubmit(e) {
         e.preventDefault()
-        axios.post("http://localhost:3001/activities", formData).catch((error) => {
+        axios.post(`http://${serverIp}:${serverPort}/activities`, formData).catch((error) => {
         })
     }
 

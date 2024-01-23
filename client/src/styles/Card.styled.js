@@ -13,7 +13,7 @@ export const Container = styled.div`
         height: 100%;
         width: 100%;
         background-color: #00000099;
-        backdrop-filter: blur(5px);
+        
     }
 
     img {

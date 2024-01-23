@@ -1,9 +1,8 @@
-import Navbar from "../Navbar/Navbar.jsx"
 import Cards from "../Cards/Cards.jsx"
 import { Container } from "../../styles/Home.styled.js"
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
-import { storeActivities, storeCountries, switchPage, filterByActivity, filterByContinent } from "../../redux/actions.js"
+import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { storeActivities, storeCountries} from "../../redux/actions.js"
 
 import { Outlet } from "react-router-dom"
 

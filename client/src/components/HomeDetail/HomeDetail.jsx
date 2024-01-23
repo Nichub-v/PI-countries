@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container } from "../../styles/HomeDetail.styled.js"
+import { serverIp, serverPort } from "../../config.js"
 
 export default function Detail() {
     const { id } = useParams(true)
@@ -9,7 +10,7 @@ export default function Detail() {
     const navigate = useNavigate()
 
     useEffect(()=> {
-        axios.get(`http://localhost:3001/countries/${id}`).then(({ data }) => {
+        axios.get(`http://${serverIp}:${serverPort}/countries/${id}`).then(({ data }) => {
         setCountry(data)
     }).catch((error) => {
         console.log(error)

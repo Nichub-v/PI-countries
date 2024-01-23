@@ -15,7 +15,6 @@ function reducer(state = initState, action) {
         case "RESET":
             return {...state, filteredCountries: state.allCountries}
 
-
         case "STORE_ACTIVITIES":
             return {...state, allActivities: action.payload}
 
