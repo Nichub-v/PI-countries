@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    animation-name: show;
+    animation-duration: 0.5s;
+
     height: calc(100% - 10px);
     max-width: 470px;
     width: 100%;
-
+    
     .hide {
         opacity: 0;
         animation-name: hide;
@@ -28,16 +31,27 @@ export const Container = styled.div`
     }
 
     .results-container {
+        position: fixed;
+        left: 0;
+        right: 0;
+        max-width: 470px;
+        width: 100%;
+        margin: auto;
+        
+    }
+
+    .results-sub-container {
         background-color: ${({theme}) => theme.colors.darkerBgCol};
+        color: ${({theme})=> theme.colors.text};
         
         margin-top: 5px;
-        width: 100%;
-        
+        max-width: 100%;
+
         border-radius: 15px;
         overflow: auto;
         max-height: calc(100vh - 55px); /* 55 px es el tamaño del componente Navbar */
         padding: 7px 0;
-        
+        box-shadow: 0px 5px 15px 3px #00000055;
     }
 
     .result-li {
@@ -71,6 +85,7 @@ export const Container = styled.div`
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        color: ${({theme})=> theme.colors.text};
     }
 
 
@@ -83,7 +98,7 @@ export const Container = styled.div`
 
     .result-link:hover {
         transition: 0.2s;
-        background-color: ${({theme}) => theme.colors.lighterBgCol}
+        background-color: ${({theme}) => theme.colors.lighterBgCol};
     }
 
     .search-bar {
@@ -92,6 +107,13 @@ export const Container = styled.div`
         display: flex;
         border-radius: 27px;
         overflow: hidden;
+        outline: 5px solid transparent;
+        transition: 0.2s;
+    }
+
+    .search-bar:has(input:focus) {
+        outline: 1px solid ${({theme}) => theme.colors.accent};
+        transition: 0.2s;
     }
 
     .search-bar input {
@@ -109,6 +131,13 @@ export const Container = styled.div`
         font-weight: 100;
         font-size: 17px;
         font-weight: 500;
+
+        transition: 0.2s;
+    }
+
+    .input:disabled {
+        color: ${({theme}) => theme.colors.text}66;
+        transition: 0.2s;
     }
 
     .icon-container {
@@ -118,6 +147,7 @@ export const Container = styled.div`
 
         color: ${({theme}) => theme.colors.text};
         background-color: ${({theme}) => theme.colors.darkerBgCol};
+        transition: 0.2s;
     }
 
     .icon {
@@ -148,8 +178,10 @@ export const Container = styled.div`
     }
 
     @media screen and (max-width: 470px) {
-	    .results-container {
+	    .results-sub-container {
             border-radius: 0;
+            box-shadow: 0px 15px 15px 3px #00000055;
+            background-color: ${({theme}) => theme.colors.bgCol};
         }
 
         .search-bar {

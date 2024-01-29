@@ -3,11 +3,21 @@ const { Op } = require('sequelize');
 
 module.exports = async function(req, res) {
     try {
+        const existentActivity = await Activity.findOne({
+            where: {
+                name: req.body.name
+            }
+        })
+
+        if (existentActivity) {
+            throw new Error("Ya existe una actividad con ese nombre")
+        }
+
         const newActivity = await Activity.create({
             name: req.body.name,
             difficulty: req.body.difficulty,
             duration: req.body.duration,
-            season: req.body.season,
+            seasons: req.body.seasons,
         })
 
         if (req.body.countries) {
@@ -20,10 +30,7 @@ module.exports = async function(req, res) {
             throw new Error("No se indicaron países para la actividad")
         }
        
-
-        
-
-        res.status(200).json(newActivity)
+        res.status(200).json({success: "La actividad se creó correctamente"})
     } catch(error) {
         res.status(400).json({error: `${error}`})
     }

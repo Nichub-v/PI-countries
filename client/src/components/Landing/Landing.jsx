@@ -1,15 +1,39 @@
-import { NavLink } from "react-router-dom";
-import countriesImg from "./countries.png"
+import { Link } from "react-router-dom";
+import bgImg from "../../../img/landingBg.jpg"
+import { Container } from "../../styles/Landing.styled.js" 
+
+import { HiCamera } from "react-icons/hi2";
 
 export default function Landing() {
 
     return (
-        <div>
-            <h1>Landing page</h1>
+        <Container bgImg={bgImg}>
+            <div className="bgDiv"></div>
+            <header className="header"></header>
+            
+            <div className="text-container">
+                <h1 className="title">Bienvenido</h1>
+                <p className="subtitle">Busca países, accede a su información, crea y visualiza sus actividades turísticas.</p>
+                <Link to="/home"><button className="button">Acceder</button></Link>
+            </div>
+            
+            <footer className="footer">
+                
+                <p className="copyright"><HiCamera className="camera-icon"/>Imágen por Javier Miranda</p>
+                <p className="copyright-handle">(@nuvaproductions).</p>
+                <p className="footer-info">Desarrollado con React, Express, Postgres, entre otras tecnologías.</p>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium hic aliquam, velit asperiores totam nisi exercitationem illo quo error quaerat provident incidunt quidem! Nemo adipisci id voluptatem harum enim commodi.</p>
-            <img width="1500px" src={countriesImg}></img>
-            <NavLink to="/home"><button>Home</button></NavLink>
-        </div>
+                <div className="contact-container">
+                    <Link>LinkedIn</Link>
+                    <div></div>
+                    <Link>Discord</Link>
+                    <div></div>
+                    <Link>Slack</Link>
+                </div>
+            </footer>
+
+            
+        </Container>
+
     )
 }

@@ -31,8 +31,8 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
 
-        season: {
-            type: DataTypes.STRING,
+        seasons: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false
         }
     }, {timestamps: false});

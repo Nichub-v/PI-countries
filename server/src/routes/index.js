@@ -4,6 +4,7 @@ const getCountries = require("../controllers/getCountries.js")
 const postActivities = require("../controllers/postActivities.js")
 const getActivities = require("../controllers/getActivities.js")
 const getActivityCountries = require("../controllers/getActivityCountries.js")
+const postFeedback = require("../controllers/postFeedback.js")
 
 const router = Router();
 
@@ -35,6 +36,11 @@ router.post("/activities", function (req, res) {
 router.get("/activities", function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     getActivities(req, res)
+})
+
+router.post("/feedback", function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    postFeedback(req, res)
 })
 
 module.exports = router;
